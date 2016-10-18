@@ -1,0 +1,26 @@
+
+InTerminator="\r\000>";
+OutTerminator=CR;
+ExtraInput=Ignore;
+
+idn             { out "*idn?"             ;in "*idn?\r\000%60c"        ; }
+getEnabledState { out "ens?"              ;in "ens?\r\000%{0|1}"       ; }
+getRepeatCnt    { out "rep?"              ;in "rep?\r\000%i"           ; }
+getMode         { out "mode?"             ;in "mode?\r\000%i"          ; }
+getTrigMode     { out "trig?"             ;in "trig?\r\000%{0|1}"      ; }
+getTrigOutMode  { out "xto?"              ;in "xto?\r\000%{0|1}"       ; }
+getOpenTime     { out "open?"             ;in "open?\r\000%i"          ; }
+getClosedTime   { out "shut?"             ;in "shut?\r\000%i"          ; }
+getShutterState { out "closed?"           ;in "closed?\r\000%{0|1}"    ; }
+getIntState     { out "interlock?"        ;in "interlock?\r\000%{0|1}" ; }
+
+setEnabledState { out "ens"               ;in "ens"                    ; }
+setRepeatCnt    { out "rep=%i"            ;in "rep=%i"                 ; }
+setMode         { out "mode=%i"           ;in "mode=%i"                ; }
+setTrigMode     { out "trig=%{0|1}"       ;in "trig=%{0|1}"            ; }
+setTrigOutMode  { out "xto=%{0|1}"        ;in "xto=%{0|1}"             ; }
+setOpenTime     { out "open=%i"           ;in "open=%i"                ; }
+setClosedTime   { out "shut=%i"           ;in "shut=%i"                ; }
+save            { out "save"              ;in "save"                   ; }
+savp            { out "savp"              ;in "savp"                   ; }
+resp            { out "resp"              ;in "resp"                   ; }
