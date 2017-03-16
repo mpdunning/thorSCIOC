@@ -9,59 +9,59 @@ record( stringin, "$(P):IDN"){
   field( INP,  "@$(PROTOFILE) idn $(PORT)")
 }
 #---------------------------------------------
-record(bo,"$(P):ENABLE:STATE:SC"){
+record(bo,"$(P):SHUTTER:ENABLE"){
   field( DESC, "Toggle Enabled/Disabled State")
   field( ZNAM, "Disabled")
   field( ONAM, "Enabled")
-  field( OUT,  "$(P):ENABLE:STATE PP")
+  field( OUT,  "$(P):SHUTTER:ENABLE_write PP")
 }
-record(bo,"$(P):ENABLE:STATE"){
-  field( SDIS, "$(P):ENABLE:STATE:Sync.PACT")
+record(bo,"$(P):SHUTTER:ENABLE_write"){
+  field( SDIS, "$(P):SHUTTER:ENABLE_sync.PACT")
   field( DISV, "1")
   field( DTYP, "stream")
   field( OUT,  "@$(PROTOFILE) setEnabledState $(PORT)")
-  field( FLNK, "$(P):SHUTTER:STATE:RBV.PROC")
+  field( FLNK, "$(P):SHUTTER:STATE_RBV.PROC")
 }
-record(bi,"$(P):ENABLE:STATE:RBV"){
+record(bi,"$(P):SHUTTER:ENABLE_RBV"){
   field( DESC, "Enabled/Disabled State")
   field( DTYP, "stream")
   field( INP,  "@$(PROTOFILE) getEnabledState $(PORT)")
   field( ZNAM, "Disabled")
   field( ONAM, "Enabled")
-  field( FLNK, "$(P):ENABLE:STATE:Sync")
+  field( FLNK, "$(P):SHUTTER:ENABLE_sync")
 }
-record( bo, "$(P):ENABLE:STATE:Sync"){
-  field( DOL,  "$(P):ENABLE:STATE:RBV NPP")
+record( bo, "$(P):SHUTTER:ENABLE_sync"){
+  field( DOL,  "$(P):SHUTTER:ENABLE_RBV NPP")
   field( OMSL, "closed_loop")
-  field( OUT,  "$(P):ENABLE:STATE:SC PP")
+  field( OUT,  "$(P):SHUTTER:ENABLE PP")
 }
 #---------------------------------------------
-record(longout,"$(P):REPEAT:COUNT:SC"){
+record(longout,"$(P):SHUTTER:REPEAT_COUNT"){
   field( DESC, "Repeat count")
-  field( OUT,  "$(P):REPEAT:COUNT PP")
+  field( OUT,  "$(P):SHUTTER:REPEAT_COUNT_write PP")
 }
-record(longout,"$(P):REPEAT:COUNT"){
-  field( SDIS, "$(P):REPEAT:COUNT:Sync.PACT")
+record(longout,"$(P):SHUTTER:REPEAT_COUNT_write"){
+  field( SDIS, "$(P):SHUTTER:REPEAT_COUNT_sync.PACT")
   field( DISV, "1")
   field( DTYP, "stream")
   field( OUT,  "@$(PROTOFILE) setRepeatCnt $(PORT)")
-  field( FLNK, "$(P):SHUTTER:STATE:RBV.PROC")
+  field( FLNK, "$(P):SHUTTER:STATE_RBV.PROC")
 }
-record(longin,"$(P):REPEAT:COUNT:RBV"){
+record(longin,"$(P):SHUTTER:REPEAT_COUNT_RBV"){
   field( DESC, "Repeat count")
   field( DTYP, "stream")
   field( INP,  "@$(PROTOFILE) getRepeatCnt $(PORT)")
-  field( FLNK, "$(P):REPEAT:COUNT:Sync")
+  field( FLNK, "$(P):SHUTTER:REPEAT_COUNT_sync")
 }
-record(longout, "$(P):REPEAT:COUNT:Sync"){
-  field( DOL,  "$(P):REPEAT:COUNT:RBV NPP")
+record(longout, "$(P):SHUTTER:REPEAT_COUNT_sync"){
+  field( DOL,  "$(P):SHUTTER:REPEAT_COUNT_RBV NPP")
   field( OMSL, "closed_loop")
-  field( OUT,  "$(P):REPEAT:COUNT:SC PP")
+  field( OUT,  "$(P):SHUTTER:REPEAT_COUNT PP")
 }
 #--------------------------------------------
-record(mbbo,"$(P):MODE:SC"){
+record(mbbo,"$(P):SHUTTER:OUT_MODE"){
   field( DESC, "Operating mode")
-  field( OUT,  "$(P):MODE PP")
+  field( OUT,  "$(P):SHUTTER:OUT_MODE_write PP")
   field( ZRVL, "1")
   field( ONVL, "2")
   field( TWVL, "3")
@@ -73,8 +73,8 @@ record(mbbo,"$(P):MODE:SC"){
   field( THST, "Repeat")
   field( FRST, "External Gate")
 }
-record(mbbo,"$(P):MODE"){
-  field( SDIS, "$(P):MODE:Sync.PACT")
+record(mbbo,"$(P):SHUTTER:OUT_MODE_write"){
+  field( SDIS, "$(P):SHUTTER:OUT_MODE_sync.PACT")
   field( DISV, "1")
   field( DTYP, "stream")
   field( OUT,  "@$(PROTOFILE) setMode $(PORT)")
@@ -88,9 +88,9 @@ record(mbbo,"$(P):MODE"){
   field( TWST, "Single")
   field( THST, "Repeat")
   field( FRST, "External Gate")
-  field( FLNK, "$(P):SHUTTER:STATE:RBV.PROC")
+  field( FLNK, "$(P):SHUTTER:STATE_RBV.PROC")
 }
-record(mbbi,"$(P):MODE:RBV"){
+record(mbbi,"$(P):SHUTTER:OUT_MODE_RBV"){
   field( DESC, "Operating mode")
   field( DTYP, "stream")
   field( INP,  "@$(PROTOFILE) getMode $(PORT)")
@@ -104,12 +104,12 @@ record(mbbi,"$(P):MODE:RBV"){
   field( TWST, "Single")
   field( THST, "Repeat")
   field( FRST, "External Gate")
-  field( FLNK, "$(P):MODE:Sync")
+  field( FLNK, "$(P):SHUTTER:OUT_MODE_sync")
 }
-record( mbbo, "$(P):MODE:Sync"){
-  field( DOL,  "$(P):MODE:RBV NPP")
+record( mbbo, "$(P):SHUTTER:OUT_MODE_sync"){
+  field( DOL,  "$(P):SHUTTER:OUT_MODE_RBV NPP")
   field( OMSL, "closed_loop")
-  field( OUT,  "$(P):MODE:SC PP")
+  field( OUT,  "$(P):SHUTTER:OUT_MODE PP")
   field( ZRVL, "1")
   field( ONVL, "2")
   field( TWVL, "3")
@@ -122,121 +122,121 @@ record( mbbo, "$(P):MODE:Sync"){
   field( FRST, "External Gate")
 }
 #----------------------------------------------
-record(bo,"$(P):TRIG:MODE:SC"){
+record(bo,"$(P):TRIG:IN_MODE"){
   field( DESC, "Trigger mode")
-  field( OUT,  "$(P):TRIG:MODE PP")
+  field( OUT,  "$(P):TRIG:IN_MODE_write PP")
   field( ZNAM, "Internal")
   field( ONAM, "External")
 }
-record(bo,"$(P):TRIG:MODE"){
-  field( SDIS, "$(P):TRIG:MODE:Sync.PACT")
+record(bo,"$(P):TRIG:IN_MODE_write"){
+  field( SDIS, "$(P):TRIG:IN_MODE_sync.PACT")
   field( DISV, "1")
   field( DTYP, "stream")
   field( OUT,  "@$(PROTOFILE) setTrigMode $(PORT)")
-  field( FLNK, "$(P):SHUTTER:STATE:RBV.PROC")
+  field( FLNK, "$(P):SHUTTER:STATE_RBV.PROC")
 }
-record(bi,"$(P):TRIG:MODE:RBV"){
+record(bi,"$(P):TRIG:IN_MODE_RBV"){
   field( DESC, "Trigger mode")
   field( DTYP, "stream")
   field( INP,  "@$(PROTOFILE) getTrigMode $(PORT)")
   field( ZNAM, "Internal")
   field( ONAM, "External")
-  field( FLNK, "$(P):TRIG:MODE:Sync")
+  field( FLNK, "$(P):TRIG:IN_MODE_sync")
 }
-record( bo, "$(P):TRIG:MODE:Sync"){
-  field( DOL,  "$(P):TRIG:MODE:RBV NPP")
+record( bo, "$(P):TRIG:IN_MODE_sync"){
+  field( DOL,  "$(P):TRIG:IN_MODE_RBV NPP")
   field( OMSL, "closed_loop")
-  field( OUT,  "$(P):TRIG:MODE:SC PP")
+  field( OUT,  "$(P):TRIG:IN_MODE PP")
 }
 #-----------------------------------------------
-record(bo,"$(P):TRIGOUT:MODE:SC"){
+record(bo,"$(P):TRIG:OUT_MODE"){
   field( DESC, "Trigger out mode")
-  field( OUT,  "$(P):TRIGOUT:MODE PP")
+  field( OUT,  "$(P):TRIG:OUT_MODE_write PP")
   field( ZNAM, "Shutter")
   field( ONAM, "Controller")
 }
-record(bo,"$(P):TRIGOUT:MODE"){
-  field( SDIS, "$(P):TRIGOUT:MODE:Sync.PACT")
+record(bo,"$(P):TRIG:OUT_MODE_write"){
+  field( SDIS, "$(P):TRIG:OUT_MODE_sync.PACT")
   field( DISV, "1")
   field( DTYP, "stream")
   field( OUT,  "@$(PROTOFILE) setTrigOutMode $(PORT)")
-  field( FLNK, "$(P):SHUTTER:STATE:RBV.PROC")
+  field( FLNK, "$(P):SHUTTER:STATE_RBV.PROC")
 }
-record(bi,"$(P):TRIGOUT:MODE:RBV"){
+record(bi,"$(P):TRIG:OUT_MODE_RBV"){
   field( DESC, "Trigger out mode")
   field( DTYP, "stream")
   field( INP,  "@$(PROTOFILE) getTrigOutMode $(PORT)")
   field( ZNAM, "Shutter")
   field( ONAM, "Controller")
-  field( FLNK, "$(P):TRIGOUT:MODE:Sync")
+  field( FLNK, "$(P):TRIG:OUT_MODE_sync")
 }
-record( bo, "$(P):TRIGOUT:MODE:Sync"){
-  field( DOL,  "$(P):TRIGOUT:MODE:RBV NPP")
+record( bo, "$(P):TRIG:OUT_MODE_sync"){
+  field( DOL,  "$(P):TRIG:OUT_MODE_RBV NPP")
   field( OMSL, "closed_loop")
-  field( OUT,  "$(P):TRIGOUT:MODE:SC PP")
+  field( OUT,  "$(P):TRIG:OUT_MODE PP")
 }
 #-------------------------------------------
-record(longout,"$(P):OPEN:TIME:SC"){
+record(longout,"$(P):SHUTTER:OPEN_TIME"){
   field( DESC, "Shutter open time")
-  field( OUT,  "$(P):OPEN:TIME PP")
+  field( OUT,  "$(P):SHUTTER:OPEN_TIME_write PP")
   field( EGU,  "ms")
 }
-record(longout,"$(P):OPEN:TIME"){
-  field( SDIS, "$(P):OPEN:TIME:Sync.PACT")
+record(longout,"$(P):SHUTTER:OPEN_TIME_write"){
+  field( SDIS, "$(P):SHUTTER:OPEN_TIME_sync.PACT")
   field( DISV, "1")
   field( DTYP, "stream")
   field( OUT,  "@$(PROTOFILE) setOpenTime $(PORT)")
-  field( FLNK, "$(P):SHUTTER:STATE:RBV.PROC")
+  field( FLNK, "$(P):SHUTTER:STATE_RBV.PROC")
 }
-record(longin,"$(P):OPEN:TIME:RBV"){
+record(longin,"$(P):SHUTTER:OPEN_TIME_RBV"){
   field( DESC, "Shutter open time")
   field( DTYP, "stream")
   field( EGU,  "ms")
   field( INP,  "@$(PROTOFILE) getOpenTime $(PORT)")
-  field( FLNK, "$(P):OPEN:TIME:Sync")
+  field( FLNK, "$(P):SHUTTER:OPEN_TIME_sync")
 }
-record(longout, "$(P):OPEN:TIME:Sync"){
-  field( DOL,  "$(P):OPEN:TIME:RBV NPP")
+record(longout, "$(P):SHUTTER:OPEN_TIME_sync"){
+  field( DOL,  "$(P):SHUTTER:OPEN_TIME_RBV NPP")
   field( OMSL, "closed_loop")
-  field( OUT,  "$(P):OPEN:TIME:SC PP")
+  field( OUT,  "$(P):SHUTTER:OPEN_TIME PP")
 }
 #--------------------------------------------
-record(longout,"$(P):CLOSED:TIME:SC"){
+record(longout,"$(P):SHUTTER:CLOSED_TIME"){
   field( DESC, "Shutter closed time")
-  field( OUT,  "$(P):CLOSED:TIME PP")
+  field( OUT,  "$(P):SHUTTER:CLOSED_TIME_write PP")
   field( EGU,  "ms")
 }
-record(longout,"$(P):CLOSED:TIME"){
-  field( SDIS, "$(P):CLOSED:TIME:Sync.PACT")
+record(longout,"$(P):SHUTTER:CLOSED_TIME_write"){
+  field( SDIS, "$(P):SHUTTER:CLOSED_TIME_sync.PACT")
   field( DISV, "1")
   field( DTYP, "stream")
   field( OUT,  "@$(PROTOFILE) setClosedTime $(PORT)")
-  field( FLNK, "$(P):SHUTTER:STATE:RBV.PROC")
+  field( FLNK, "$(P):SHUTTER:STATE_RBV.PROC")
 }
-record(longin,"$(P):CLOSED:TIME:RBV"){
+record(longin,"$(P):SHUTTER:CLOSED_TIME_RBV"){
   field( DESC, "Shutter closed time")
   field( DTYP, "stream")
   field( EGU,  "ms")
   field( INP,  "@$(PROTOFILE) getClosedTime $(PORT)")
-  field( FLNK, "$(P):CLOSED:TIME:Sync")
+  field( FLNK, "$(P):SHUTTER:CLOSED_TIME_sync")
 }
-record(longout, "$(P):CLOSED:TIME:Sync"){
-  field( DOL,  "$(P):CLOSED:TIME:RBV NPP")
+record(longout, "$(P):SHUTTER:CLOSED_TIME_sync"){
+  field( DOL,  "$(P):SHUTTER:CLOSED_TIME_RBV NPP")
   field( OMSL, "closed_loop")
-  field( OUT,  "$(P):CLOSED:TIME:SC PP")
+  field( OUT,  "$(P):SHUTTER:CLOSED_TIME PP")
 }
 #--------------------------------------------
-record(bi,"$(P):SHUTTER:STATE:RBV"){
+record(bi,"$(P):SHUTTER:STATE_RBV"){
   field( DESC, "Shutter open/closed state")
   field( DTYP, "stream")
   field( INP,  "@$(PROTOFILE) getShutterState $(PORT)")
-  field( ZNAM, "Shutter Open")
-  field( ONAM, "Shutter Closed")
-  field( ZSV,  "MAJOR")
-  field( OSV,  "NO_ALARM")
-  field( SCAN, ".1 second")
+  field( ZNAM, "Closed")
+  field( ONAM, "Open")
+  field( ZSV,  "NO_ALARM")
+  field( OSV,  "MAJOR")
+#  field( SCAN, ".1 second")
 }
-record(bi,"$(P):INTERLOCK:STATE:RBV"){
+record(bi,"$(P):INTERLOCK:STATE_RBV"){
   field( DESC, "Shutter interlock state")
   field( DTYP, "stream")
   field( INP,  "@$(PROTOFILE) getIntState $(PORT)")
@@ -244,19 +244,6 @@ record(bi,"$(P):INTERLOCK:STATE:RBV"){
   field( ONAM, "Tripped")
 }
 #================================================
-record(longout,"$(P):OPEN:TIME"){
-  field( DESC, "Shutter open time")
-  field( DTYP, "stream")
-  field( EGU,  "ms")
-  field( OUT,  "@$(PROTOFILE) setOpenTime $(PORT)")
-  field( FLNK, "$(P):REPEAT:COUNT:Sync")
-}
-record(longout,"$(P):CLOSED:TIME"){
-  field( DESC, "Shutter closed time")
-  field( DTYP, "stream")
-  field( EGU,  "ms")
-  field( OUT,  "@$(PROTOFILE) setClosedTime $(PORT)")
-}
 # Init and read sequences ---------------------------
 record( seq, "$(P):SEQ0"){
   field( DESC, "Initialization sequence")
@@ -266,41 +253,50 @@ record( seq, "$(P):SEQ0"){
 }
 record( seq, "$(P):SEQ1"){
   field( DESC, "Read sequence")
-  field( LNK1, "$(P):ENABLE:STATE:RBV.PROC")
+  field( LNK1, "$(P):SHUTTER:ENABLE_RBV.PROC")
   field( DLY1, "$(DELAY1)")
-  field( LNK2, "$(P):REPEAT:COUNT:RBV.PROC")
+  field( LNK2, "$(P):SHUTTER:REPEAT_COUNT_RBV.PROC")
   field( DLY2, "$(DELAY1)")
-  field( LNK3, "$(P):MODE:RBV.PROC")
+  field( LNK3, "$(P):SHUTTER:OUT_MODE_RBV.PROC")
   field( DLY3, "$(DELAY1)")
-  field( LNK4, "$(P):TRIG:MODE:RBV.PROC")
+  field( LNK4, "$(P):TRIG:IN_MODE_RBV.PROC")
   field( DLY4, "$(DELAY1)")
-  field( LNK5, "$(P):EXTTRIG:MODE:RBV.PROC")
+  field( LNK5, "$(P):TRIG:OUT_MODE_RBV.PROC")
   field( DLY5, "$(DELAY1)")
-  field( LNK6, "$(P):OPEN:TIME:RBV.PROC")
+  field( LNK6, "$(P):SHUTTER:OPEN_TIME_RBV.PROC")
   field( DLY6, "$(DELAY1)")
-  field( LNK7, "$(P):CLOSED:TIME:RBV.PROC")
+  field( LNK7, "$(P):SHUTTER:CLOSED_TIME_RBV.PROC")
   field( DLY7, "$(DELAY1)")
-  #field( LNK8, "$(P):SHUTTER:STATE:RBV.PROC")
-  #field( DLY8, "$(DELAY1)")
-  field( LNK9, "$(P):INTERLOCK:STATE:RBV.PROC")
+  field( LNK8, "$(P):SHUTTER:STATE_RBV.PROC")
+  field( DLY8, "$(DELAY1)")
+  field( LNK9, "$(P):INTERLOCK:STATE_RBV.PROC")
   field( DLY9, "$(DELAY1)")
   #field( LNKA,"$(P):SEQ2.PROC")
   #field( DLYA,"$(DELAY1)")
   field( SCAN, "2 second")
 }
 # open/close button -------------------------------------
-record(bi,"$(P):SHUTTER:OC"){
-  field( DESC, "Shutter open/close")
-  field( ZNAM, "close")
-  field( ONAM, "open")
-  field( FLNK, "$(P):SHUTTER:CALC:OC")
+record(bo,"$(P):SHUTTER:OPEN"){
+  field( DESC, "Shutter open")
+  field( FLNK, "$(P):SHUTTER:OPEN_calc")
 }
-record(calcout,"$(P):SHUTTER:CALC:OC"){
+record(bo,"$(P):SHUTTER:CLOSE"){
+  field( DESC, "Shutter close")
+  field( FLNK, "$(P):SHUTTER:CLOSE_calc")
+}
+record(calcout,"$(P):SHUTTER:OPEN_calc"){
   field( DESC, "Shutter open/close logic")
-  field( INPA, "$(P):SHUTTER:STATE:RBV")
-  field( INPB, "$(P):SHUTTER:OC")
-  field( CALC, "A=B")
-  field( OUT,  "$(P):ENABLE:STATE:SC.PROC")
+  field( INPA, "$(P):SHUTTER:STATE_RBV")
+  field( CALC, "A=0?1:0")
+  field( OUT,  "$(P):SHUTTER:ENABLE PP")
   field( OOPT, "When Non-zero")
-  field( PINI, "NO")
+  field( PINI, "0")
+}
+record(calcout,"$(P):SHUTTER:CLOSE_calc"){
+  field( DESC, "Shutter open/close logic")
+  field( INPA, "$(P):SHUTTER:STATE_RBV")
+  field( CALC, "A=1?0:1")
+  field( OUT,  "$(P):SHUTTER:ENABLE PP")
+  field( OOPT, "When Zero")
+  field( PINI, "0")
 }

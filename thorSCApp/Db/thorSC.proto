@@ -11,7 +11,7 @@ getTrigMode     { out "trig?"             ;in "trig?\r\000%{0|1}"      ; }
 getTrigOutMode  { out "xto?"              ;in "xto?\r\000%{0|1}"       ; }
 getOpenTime     { out "open?"             ;in "open?\r\000%i"          ; }
 getClosedTime   { out "shut?"             ;in "shut?\r\000%i"          ; }
-getShutterState { out "closed?"           ;in "closed?\r\000%{0|1}"    ; }
+getShutterState { out "closed?"           ;in "closed?\r\000%{1|0}"    ; }
 getIntState     { out "interlock?"        ;in "interlock?\r\000%{0|1}" ; }
 
 setEnabledState { out "ens"               ;in "ens"                    ; }
